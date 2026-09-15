@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prelim Science Marks — Medallion Dashboard</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-inner">
+      <p class="eyebrow">Bronze → Silver → Gold · Medallion Architecture</p>
+      <h1>Prelim Science Marks</h1>
+      <p class="sub">100 students · 7 subjects · grade bands 10, 11 &amp; 12 — built from a single flat CSV</p>
+    </div>
+    <div class="pipeline">
+      <span class="chip bronze">Bronze<small>raw per band</small></span>
+      <span class="arrow">→</span>
+      <span class="chip silver">Silver<small>cleaned + enriched</small></span>
+      <span class="arrow">→</span>
+      <span class="chip gold">Gold<small>aggregates</small></span>
+    </div>
+  </header>
+
+  <main>
+    <!-- KPI cards -->
+    <section id="kpis" class="kpi-grid"></section>
+
+    <!-- Gold: grade summary -->
+    <section class="panel">
+      <h2>gold.grade_summary</h2>
+      <div id="grade-summary" class="summary-grid"></div>
+    </section>
+
+    <!-- Charts -->
+    <section class="charts-grid">
+      <div class="panel">
+        <h2>gold.subject_performance — average mark by grade band</h2>
+        <canvas id="subjectChart"></canvas>
+      </div>
+      <div class="panel">
+        <h2>Pass vs fail by grade band</h2>
+        <canvas id="passChart"></canvas>
+      </div>
+    </section>
+
+    <!-- Silver: student explorer -->
+    <section class="panel">
+      <h2>silver.grade_cleaned — student explorer</h2>
+      <div class="controls">
+        <input id="search" type="search" placeholder="Search name or student ID…" />
+        <select id="bandFilter">
+          <option value="">All grade bands</option>
+          <option value="10">Grade 10</option>
+          <option value="11">Grade 11</option>
+          <option value="12">Grade 12</option>
+        </select>
+        <select id="resultFilter">
+          <option value="">All results</option>
+          <option value="PASS">Pass</option>
+          <option value="FAIL">Fail</option>
+        </select>
+      </div>
+      <div class="table-wrap">
+        <table id="studentTable">
+          <thead>
+            <tr>
+              <th data-key="student_id">ID</th>
+              <th data-key="student_name">Name</th>
+              <th data-key="grade">Class</th>
+              <th data-key="grade_band">Band</th>
+              <th data-key="mathematics_mark" class="num">Math</th>
+              <th data-key="physical_science_mark" class="num">Phys Sci</th>
+              <th data-key="life_sciences_mark" class="num">Life Sci</th>
+              <th data-key="english_home_language_mark" class="num">English</th>
+              <th data-key="life_orientation_mark" class="num">LO</th>
+              <th data-key="information_technology_mark" class="num">IT</th>
+              <th data-key="agricultural_science_mark" class="num">Agri Sci</th>
+              <th data-key="average_mark" class="num">Avg %</th>
+              <th data-key="subjects_failed" class="num">Failed</th>
+              <th data-key="overall_result">Result</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <p id="rowCount" class="row-count"></p>
+    </section>
+  </main>
+
+  <footer>
+    Source: prelim_science_students_marks.csv · Subject fail threshold: below 40% ·
+    Overall pass: average ≥ 40% with at most 2 subjects failed
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
