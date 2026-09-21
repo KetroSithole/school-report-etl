@@ -1,3 +1,3 @@
 1.Duplicated Data on the silver layer (getting data from bronze layer to the silver layer).
---where not exist  Table A (1,2)  Table B (1,2)
+--where not exist  Table A (1,2)  Table B (1,2)  -DONE
 2.Clean Data (make sure that u have good data types , make sure ur columns are named properly)
