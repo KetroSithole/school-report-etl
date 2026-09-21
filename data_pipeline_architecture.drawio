@@ -1,0 +1,109 @@
+<mxfile host="app.diagrams.net" modified="2026-09-17T00:00:00.000Z" agent="Claude" version="24.0.0" type="device">
+  <diagram name="Data Pipeline Architecture" id="dataPipelineArch">
+    <mxGraphModel dx="1400" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- ===================== SOURCE LAYER ===================== -->
+        <mxCell id="user" value="Amazoner" style="shape=actor;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="40" y="100" width="50" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="website" value="Amazon.com&#10;(Web Application)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#4A90D9;strokeColor=#1b3a5c;fontColor=#ffffff;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="150" y="100" width="140" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="eventJson" value="JSON&#10;(event)" style="shape=document;whiteSpace=wrap;html=1;fillColor=#2b2b2b;strokeColor=#000000;fontColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="340" y="110" width="90" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- ===================== OLTP LAYER ===================== -->
+        <mxCell id="oltpGroup" value="OLTP Layer (Transactional Source)" style="rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;fillColor=none;strokeColor=#333333;dashed=1;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="480" y="60" width="160" height="200" as="geometry" />
+        </mxCell>
+
+        <mxCell id="oltpDb" value="OLTP Database&#10;(Raw JSON Events)" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#f9f3e9;strokeColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="510" y="100" width="100" height="130" as="geometry" />
+        </mxCell>
+
+        <!-- ===================== STAGING LAYER ===================== -->
+        <mxCell id="stagingGroup" value="Staging Layer" style="rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;fillColor=none;strokeColor=#a33333;dashed=1;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="700" y="60" width="160" height="200" as="geometry" />
+        </mxCell>
+
+        <mxCell id="stgDb" value="stg Database&#10;(Landing Zone)" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#fbe4e4;strokeColor=#a33333;" vertex="1" parent="1">
+          <mxGeometry x="730" y="100" width="100" height="130" as="geometry" />
+        </mxCell>
+
+        <!-- ===================== DATA WAREHOUSE LAYER ===================== -->
+        <mxCell id="dwhGroup" value="DataWarehouse Layer (Medallion Architecture)" style="rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;fillColor=none;strokeColor=#333333;dashed=1;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="920" y="60" width="320" height="200" as="geometry" />
+        </mxCell>
+
+        <mxCell id="silverDb" value="Silver Layer&#10;(Cleansed &amp; Conformed)" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#f9f3e9;strokeColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="950" y="100" width="100" height="130" as="geometry" />
+        </mxCell>
+
+        <mxCell id="goldDb" value="Gold Layer&#10;(Business-Ready)" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#f9f3e9;strokeColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="1100" y="100" width="100" height="130" as="geometry" />
+        </mxCell>
+
+        <!-- ===================== REPORTING LAYER ===================== -->
+        <mxCell id="reportingGroup" value="Reporting Layer" style="rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;fillColor=none;strokeColor=#333333;dashed=1;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1280" y="20" width="240" height="320" as="geometry" />
+        </mxCell>
+
+        <mxCell id="biDash" value="BI Dashboards&#10;(Charts / Metrics)" style="shape=mxgraph.basic.bar;whiteSpace=wrap;html=1;fillColor=#f2c94c;strokeColor=#b7950b;" vertex="1" parent="1">
+          <mxGeometry x="1310" y="60" width="80" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="lookerIcon" value="Looker" style="ellipse;whiteSpace=wrap;html=1;fillColor=#eb5757;strokeColor=#a33333;fontColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="1420" y="60" width="80" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="cloudIcon" value="Cloud Platform&#10;(GCP / BigQuery)" style="shape=cloud;whiteSpace=wrap;html=1;fillColor=#4A90D9;strokeColor=#1b3a5c;fontColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="1330" y="200" width="160" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- ===================== EDGES ===================== -->
+        <mxCell id="e1" style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" parent="1" source="user" target="website">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e2" value="event" style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" parent="1" source="website" target="eventJson">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e3" value="OLTP" style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" parent="1" source="eventJson" target="oltpDb">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e4" value="ETL" style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" parent="1" source="oltpDb" target="stgDb">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e5" style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" parent="1" source="stgDb" target="silverDb">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e6" style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" parent="1" source="silverDb" target="goldDb">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e7" style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" parent="1" source="goldDb" target="biDash">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e8" style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" parent="1" source="goldDb" target="lookerIcon">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e9" style="edgeStyle=orthogonalEdgeStyle;html=1;dashed=1;" edge="1" parent="1" source="goldDb" target="cloudIcon">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
